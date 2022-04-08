@@ -1,2 +1,2 @@
 # jn-didactic
-This implements some sound solutions to common coding problems
+This package implements some sound solutions to common coding problems.
