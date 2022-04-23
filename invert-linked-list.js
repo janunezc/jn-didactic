@@ -75,11 +75,11 @@
       currentPos++; //                   2       3       4       5       6        7
     }
 
-    tailToInvert.next = null; //                                                          6>null
+    tailToInvert.next = null; //                                                          6>7 ==> 6>null
 
     let invertedPart = invertLinkedList(headToInvert); //                                 (3>4>5>6>null) => (6>5>4>3>null)
 
-    invertExit ? headToInvert.next = invertExit : null; //                                3>...null ==> 3>...7>null
+    invertExit ? headToInvert.next = invertExit : null; //                                3>null ==> 3>7>null
 
     if (invertEntry) { //                                                                 2>3
       invertEntry.next = invertedPart; //                                                 2>6>5>4>3>null
