@@ -1,6 +1,6 @@
 {
   "name": "jn-didactic",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Examples of Data Structures and Coding Challenges",
   "main": "index.js",
   "scripts": {
