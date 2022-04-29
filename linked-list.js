@@ -89,6 +89,70 @@
     }
   }
 
+  /**
+   * 
+   * @param {*} head 
+   * @returns 
+   */
+  function detectCycle_naive(head, cycleLimit) {
+    let currentNode = head;
+    let cycleCounter = 0;
+    let hashmap = {};
+    let prevNode = head;
+    while (currentNode) {
+      cycleCounter++;
+      if (cycleCounter > cycleLimit || currentNode == null || currentNode.next == null || currentNode.next.next === null) return false;
+
+      if (hashmap[currentNode.data]) {
+        return prevNode;
+      } else {
+        hashmap[currentNode.data] = currentNode;
+      }
+
+      prevNode = currentNode;
+      currentNode = currentNode.next;
+    }
+
+    return false;
+  }
+
+  function detectCycle_Floyd(head, cycleLimit) {
+    let pT = head;
+    let pL = head;
+
+    let cycleCount = 0;
+
+    while (true) {
+      if ((cycleLimit && cycleCount > cycleLimit) || (pL === null || pL.next === null || pL.next.next === null)) return false;
+
+      pT = pT.next; //1+
+      pL = pL.next.next; //2+
+
+      if (pT.data === pL.data) break; //CYCLE FOUND
+
+      cycleCount++;
+    }
+
+    let p1 = head;
+    let p2 = pT;
+    let previousNode = p2;
+
+    cycleCount = 0;
+    while (true) {
+      if (p1.data === p2.data) return previousNode;
+
+      previousNode = p2;
+      p1 = p1.next;
+      p2 = p2.next;
+
+      if (cycleLimit && cycleCount > cycleLimit) return false;
+      cycleCount++;
+    }
+  }
+
+
   exports.InvertLinkedList = invertLinkedList;
   exports.InvertLinkedListPartial = invertLinkedListPartial;
+  exports.DetectCycle_Naive = detectCycle_naive;
+  exports.DetectCycle_Floyd = detectCycle_Floyd;
 })();
