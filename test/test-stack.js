@@ -29,4 +29,46 @@ describe("Stack Library", () => {
         assert.equal(testStack.pop(), undefined);
     });
 
+    it("Performs push, peek and pop in a big dataset scenario", () => {
+        let stack = new stackLib.StackClass();
+        for (let i = 0; i < 1000000; i++) {
+            stack.push(i);
+            assert.equal(stack.peek(), i);
+        }
+
+        for (let expected = 999999; expected >= 0; expected--) {
+            let popped = stack.pop();
+            assert.equal(popped, expected);
+        }
+    });
+
+});
+
+
+describe("CheckBracketString", () => {
+    it("Processes Happy Path Case", () => {
+        let happyString = "HOLA (TODOS) ESTA ES UNA PRUEBA [prueba {elemental}] OK";
+        //                      1     0                    1       2         10
+        assert.equal(stackLib.CheckBracketString(happyString), true);
+
+    });
+
+    it("Process angry path - wrong closing symbol", () => {
+        let angryString = "HOLA (TODOS]) ESTA ES UNA PRUEBA [prueba {elemental}] OK";
+        //                      1     X 
+        assert.equal(stackLib.CheckBracketString(angryString), false);
+    });
+
+    it("Process empty string", () => {
+        let angryString = "";
+        assert.equal(stackLib.CheckBracketString(angryString), true);
+    });
+
+    it("Processes incomplete closure", () => {
+        let unclosedString = "HOLA (TODOS) ESTA ES UNA PRUEBA [prueba {elemental} OK";
+        //                         1     0                    1       2         1       !
+        assert.equal(stackLib.CheckBracketString(unclosedString), false);
+    });
+
+
 });
