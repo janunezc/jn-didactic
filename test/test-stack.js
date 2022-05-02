@@ -70,5 +70,14 @@ describe("CheckBracketString", () => {
         assert.equal(stackLib.CheckBracketString(unclosedString), false);
     });
 
+    it("Process additional happy case ((({[{[([({})])]}]})))", ()=>{
+        let anotherHappyString = "((({[{[([({})])]}]})))";
+        assert.equal(stackLib.CheckBracketString(anotherHappyString), true);        
+    });
+
+    it("Process additional angry case ((({[{[([({})])]}]}))}", ()=>{
+        let anotherHappyString = "((({[{[([({})])]}]}))}";
+        assert.equal(stackLib.CheckBracketString(anotherHappyString), false);        
+    });
 
 });
