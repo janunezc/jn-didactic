@@ -80,4 +80,9 @@ describe("CheckBracketString", () => {
         assert.equal(stackLib.CheckBracketString(anotherHappyString), false);        
     });
 
+    it("Process excess closure symbols", ()=>{
+        let excessiveString = "Hola a todos (as) este articulo será publicado en [fecha de publicación] {...texto adicional ...})";
+        assert.equal(stackLib.CheckBracketString(excessiveString), false);        
+    });
+
 });
